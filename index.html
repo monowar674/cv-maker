@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CV Maker – Build a CV and download it as a PDF</title>
+    <meta name="description"
+        content="Build a professional CV or resume. Free, no sign-up. Your details stay in your browser.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #eef1f5;
+            --panel: #fff;
+            --ink: #14213d;
+            --mute: #56647c;
+            --line: #d5dce6;
+            --ac: #0b63c5
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 16px/1.55 Manrope, system-ui, sans-serif
+        }
+
+        .w {
+            max-width: 1080px;
+            margin: auto;
+            padding: 0 22px
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            gap: 14px
+        }
+
+        nav b {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -.02em
+        }
+
+        .btn {
+            display: inline-block;
+            font: 600 15px Manrope, sans-serif;
+            text-decoration: none;
+            background: var(--ac);
+            color: #fff;
+            border: 0;
+            border-radius: 9px;
+            padding: 13px 24px;
+            cursor: pointer
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 40px;
+            align-items: center;
+            padding: 48px 0 64px
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: 1.08;
+            letter-spacing: -.03em;
+            margin: 0 0 16px;
+            font-weight: 800
+        }
+
+        .hero p {
+            color: var(--mute);
+            font-size: 18px;
+            margin: 0 0 26px;
+            max-width: 30em
+        }
+
+        .hero small {
+            display: block;
+            margin-top: 12px;
+            color: var(--mute);
+            font-size: 13px
+        }
+
+        .cv {
+            background: #fff;
+            width: 100%;
+            max-width: 340px;
+            aspect-ratio: 210/297;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 34% 1fr;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, .2);
+            transform: rotate(2.5deg);
+            border-radius: 3px;
+            overflow: hidden
+        }
+
+        .cv i {
+            display: block;
+            background: #212429;
+            padding: 16px 10px
+        }
+
+        .cv i u {
+            display: block;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #8a93a3;
+            margin: 0 auto 14px;
+            border: 3px solid #fff
+        }
+
+        .cv s,
+        .cv em {
+            display: block;
+            height: 5px;
+            border-radius: 2px;
+            background: #555b66;
+            margin-bottom: 7px;
+            text-decoration: none
+        }
+
+        .cv div {
+            padding: 18px 16px
+        }
+
+        .cv em {
+            background: #d9dee6;
+            font-style: normal
+        }
+
+        .cv em.h {
+            background: var(--ac);
+            width: 45%;
+            height: 7px;
+            margin-top: 14px
+        }
+
+        .cv em.t {
+            height: 9px;
+            width: 70%;
+            background: #14213d;
+            margin-bottom: 12px
+        }
+
+        section {
+            padding: 44px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        h2 {
+            font-size: 26px;
+            letter-spacing: -.02em;
+            margin: 0 0 22px
+        }
+
+        .g {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 26px
+        }
+
+        .g h3 {
+            margin: 0 0 6px;
+            font-size: 17px
+        }
+
+        .g p {
+            margin: 0;
+            color: var(--mute)
+        }
+
+        ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 26px;
+            counter-reset: s
+        }
+
+        ol li {
+            counter-increment: s;
+            padding-left: 46px;
+            position: relative
+        }
+
+        ol li::before {
+            content: counter(s);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--ac);
+            color: #fff;
+            font-weight: 800;
+            display: grid;
+            place-items: center
+        }
+
+        ol b {
+            display: block;
+            margin-bottom: 4px
+        }
+
+        ol span {
+            color: var(--mute)
+        }
+
+        .cta {
+            text-align: center;
+            padding: 56px 0
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 22px 0;
+            color: var(--mute);
+            font-size: 13px
+        }
+
+        @media(max-width:780px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 24px
+            }
+
+            .cv {
+                max-width: 260px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+        <nav><b>CV Maker</b><a class="btn" href="builder.html">Create my CV</a></nav>
+        <div class="hero">
+            <div>
+                <h1>Build a clean CV in minutes. Download it as a PDF.</h1>
+                <p>Choose a template, add only the sections you need, and watch your CV update as you write. Designed
+                    for resumes, professional CVs and academic CVs.</p><a class="btn" href="builder.html">Create my
+                    CV</a><small>Free to use. No sign-up. Your details stay in this browser.</small>
+            </div>
+            <div class="cv" aria-hidden="true"><i><u></u><s></s><s style="width:70%"></s><s style="width:85%"></s><s
+                        style="width:60%;margin-top:14px"></s><s></s></i>
+                <div><em class="t"></em><em style="width:90%"></em><em class="h"></em><em></em><em
+                        style="width:80%"></em><em style="width:92%"></em><em class="h"></em><em></em><em
+                        style="width:75%"></em><em style="width:88%"></em></div>
+            </div>
+        </div>
+        <section>
+            <h2>Everything you need for a job application</h2>
+            <div class="g">
+                <div>
+                    <h3>Flexible sections</h3>
+                    <p>Add experience, education, skills, projects, certifications, publications, languages, awards and
+                        many more sections only when you need them.</p>
+                </div>
+                <div>
+                    <h3>Your style</h3>
+                    <p>Choose a layout, accent colour and font. Add a photo if appropriate for your industry and
+                        location.</p>
+                </div>
+                <div>
+                    <h3>Live preview</h3>
+                    <p>See the document update while you type. Reorder sections and add multiple entries.</p>
+                </div>
+                <div>
+                    <h3>Export options</h3>
+                    <p>Download a visual PDF or use your browser’s print dialog to save a text-selectable PDF.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>How it works</h2>
+            <ol>
+                <li><b>Choose document type</b><span>Resume, professional CV or academic CV.</span></li>
+                <li><b>Add your information</b><span>Pick the sections that match your background.</span></li>
+                <li><b>Review and download</b><span>Check the preview and export your CV.</span></li>
+            </ol>
+        </section>
+        <div class="cta">
+            <h2>Ready to start?</h2><a class="btn" href="builder.html">Create my CV</a>
+        </div>
+        <footer>CV Maker · Free CV and resume builder.</footer>
+    </div>
+</body>
+
+</html>
